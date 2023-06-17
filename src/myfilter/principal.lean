@@ -40,10 +40,13 @@ notation `𝓟` := filter.principal
 
 @[simp] lemma mem_principal {s t : set α} : s ∈ 𝓟 t ↔ t ⊆ s := iff.rfl
 
-lemma mem_principal_self (s : set α) : s ∈ 𝓟 s := sorry
+lemma mem_principal_self (s : set α) : s ∈ 𝓟 s :=
+begin
+  exact λ {a : α}, mem_preimage.mp
+end
 
 /-- A filter f is finer than the principal filter of s if and only if s ∈ f. -/
-lemma le_principal_iff {s : set α} {f : filter α} : f ≤ 𝓟 s ↔ s ∈ f :=
+lemma le_principal_iff' {s : set α} {f : filter α} : f ≤ 𝓟 s ↔ s ∈ f :=
 begin
   split,
   { intro h,
@@ -55,13 +58,13 @@ end
 
 /-- The principal filter of s is finer than the principal filter of t 
 if and only if s ⊆ t. -/
-lemma principal_mono {s t : set α} : 𝓟 s ≤ 𝓟 t ↔ s ⊆ t :=
-  by simp only [le_principal_iff, mem_principal, imp_self]
+lemma principal_mono' {s t : set α} : 𝓟 s ≤ 𝓟 t ↔ s ⊆ t :=
+  by simp only [le_principal_iff', mem_principal, imp_self]
 
 /-- The principal filter of s is equal to the principal filter of t 
 if and only if s = t. -/
 @[simp] lemma principal_eq_iff_eq {s t : set α} : 𝓟 s = 𝓟 t ↔ s = t :=
-  by by simp only [le_antisymm_iff, le_principal_iff, mem_principal]; sorry
+  by by simp only [le_antisymm_iff, le_principal_iff', mem_principal]; sorry
 
 section order_filter
 
@@ -86,9 +89,9 @@ instance : lattice.order_top (filter α) :=
               upward_closure   := λ x y hx hxy a, hxy (hx a),
               inter_sets       := λ x y hx hy a, mem_inter (hx _) (hy _) },
   le := λ f g, ∀ ⦃s : set α⦄, s ∈ g → s ∈ f,
-  le_refl := sorry,
-  le_trans := sorry,
-  le_antisymm := sorry,
+  le_refl := λ a, begin intros s h, exact h end,
+  le_trans := λ a b c h₁ h₂, subset.trans h₂ h₁,
+  le_antisymm := λ a b h₁ h₂, filter.filter_eq $ subset.antisymm h₂ h₁,
   le_top := 
   begin
     intros f u hu,
@@ -112,9 +115,9 @@ instance : lattice.order_bot (filter α) :=
            upward_closure   := by simp only [mem_univ, implies_true_iff, forall_const],
            inter_sets       := by simp only [mem_univ, forall_const]},
   le := λ f g, ∀ ⦃s : set α⦄, s ∈ g → s ∈ f,
-  le_refl := sorry,
-  le_trans := sorry,
-  le_antisymm := sorry,
+  le_refl := λ a, begin intros s h, exact h end,
+  le_trans := λ a b c h₁ h₂, subset.trans h₂ h₁,
+  le_antisymm := λ a b h₁ h₂, filter.filter_eq $ subset.antisymm h₂ h₁,
   bot_le :=  
   begin
     intros f u hu,
@@ -126,7 +129,7 @@ end order_filter
 @[simp] lemma mem_bot {s : set α} : s ∈ (⊥ : filter α) :=
 trivial
 
-lemma empty_mem_iff_bot {f : filter α} : ∅ ∈ f ↔ f = ⊥ :=
+lemma empty_mem_iff_bot' {f : filter α} : ∅ ∈ f ↔ f = ⊥ :=
 begin
   split,
   { intro h,
@@ -141,14 +144,14 @@ begin
 end
 
 -- Hint: 'top_unique' is a good start.
-@[simp] lemma principal_univ : 𝓟 (univ : set α) = ⊤ :=
+@[simp] lemma principal_univ' : 𝓟 (univ : set α) = ⊤ :=
 begin
   apply lattice.top_unique,
-  simp only [le_principal_iff, mem_top, eq_self_iff_true],
+  simp only [le_principal_iff', mem_top, eq_self_iff_true],
 end
 
 -- Hint: can you guess this hint using the above hint?
-@[simp] lemma principal_empty : 𝓟 (∅ : set α) = ⊥ :=
+@[simp] lemma principal_empty' : 𝓟 (∅ : set α) = ⊥ :=
 begin
   apply lattice.bot_unique,
   intros s hs,
