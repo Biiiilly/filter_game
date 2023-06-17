@@ -32,14 +32,29 @@ instance : partial_order (filter α) :=
 { le            := λ f g, ∀ ⦃s : set α⦄, s ∈ g → s ∈ f,
   le_antisymm   := 
   begin
+
+
+
+
+
     sorry
   end,
   le_refl       :=
   begin
+
+
+
+
+
     sorry
   end,
   le_trans      :=
   begin
+
+
+
+
+
     sorry
   end }
 

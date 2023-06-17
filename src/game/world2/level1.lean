@@ -33,9 +33,19 @@ View a filter as a filter basis.
 def filter.as_basis (f : filter α) : filter_basis α :=
 ⟨f.sets,
 begin
+
+
+
+
+
   sorry
 end,
 begin
+
+
+
+
+
   sorry
 end⟩
 

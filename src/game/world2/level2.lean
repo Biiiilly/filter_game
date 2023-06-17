@@ -25,14 +25,29 @@ protected def filter (B : filter_basis α) : filter α :=
 { sets := {s | ∃ t ∈ B, t ⊆ s},
   univ_sets := 
   begin
+
+
+
+
+
     sorry
   end,
   upward_closure := 
   begin
+
+
+
+
+
     sorry
   end,
   inter_sets := 
   begin
+
+
+
+
+  
     sorry
   end }
 
