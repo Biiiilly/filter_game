@@ -9,3 +9,25 @@ id = 1
 levels = [
 	"src/game/world1/level1.lean",
 ]
+
+[[worlds]]
+name = "Filter Basis World"
+id = 2
+parents = [1]
+levels = [
+	"src/game/world2/level1.lean",
+	"src/game/world2/level2.lean",
+	"src/game/world2/level3.lean",
+]
+
+[[worlds]]
+name = "Order World"
+id = 3
+parents = [2]
+levels = [
+	"src/game/world3/level1.lean",
+	"src/game/world3/level2.lean",
+	"src/game/world3/level3.lean",
+	"src/game/world3/level4.lean",
+	"src/game/world3/level5.lean",
+]
