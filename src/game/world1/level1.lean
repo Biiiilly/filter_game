@@ -50,6 +50,11 @@ lemma mem_of_superset {x y : set α} {f : filter α} (hx : x ∈ f) (hxy : x ⊆
   y ∈ f :=
 begin
   sorry
+
+
+
+
+
 end
 
 /-
