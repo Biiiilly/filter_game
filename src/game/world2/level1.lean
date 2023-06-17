@@ -16,12 +16,6 @@ structure filter_basis (α : Type*) :=
 (inter_sets {x y}       : x ∈ sets → y ∈ sets → ∃ z ∈ sets, z ⊆ x ∩ y)
 ```
 
-A filter B is a collection of subsets, 
-so clearly we want to do something like U ∈ B.
-```
-instance : has_mem (set α) (filter_basis α) := ⟨λ U B, U ∈ B.sets⟩
-```
-
 We can prove that every filter is actually a filter basis.
 -/
 
@@ -36,3 +30,9 @@ end,
 begin
   sorry
 end⟩
+
+/-
+Below are some useful lemmas can be used later:
+-/
+lemma filter.mem_as_basis_iff (f : filter α) (t : set α) : 
+  t ∈ filter.as_basis f ↔ t ∈ f := by refl

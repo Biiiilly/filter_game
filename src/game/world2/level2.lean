@@ -1,4 +1,4 @@
-import myfilter.basis -- import our filter basis
+import game.world2.level1 -- import our filter basis
 
 open set -- make everything about sets works
 
@@ -30,5 +30,15 @@ def filter (B : filter_basis α) : filter α :=
   begin
     sorry
   end }
+
+/-
+Below are some useful lemmas can be used later:
+-/
+
+lemma mem_filter_iff (B : filter_basis α) {s : set α} : 
+  s ∈ B.filter ↔ ∃ t ∈ B, t ⊆ s := iff.rfl
+
+lemma mem_filter_of_mem (B : filter_basis α) {s : set α} : 
+  s ∈ B → s ∈ B.filter := λ s_in, ⟨s, s_in, subset.refl _⟩
 
 end filter_basis
