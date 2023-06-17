@@ -36,8 +36,6 @@ def principal (s : set α) : filter α :=
 -- We denote the principal filters as '𝓟' for convenience:
 notation `𝓟` := filter.principal
 
-#check 𝓟 s -- represents the principal filter of s
-
 @[simp] lemma mem_principal {s t : set α} : s ∈ 𝓟 t ↔ t ⊆ s := iff.rfl
 
 lemma mem_principal_self (s : set α) : s ∈ 𝓟 s := subset.rfl
