@@ -1,0 +1,46 @@
+import myfilter.basic
+
+open set
+
+variable {α : Type*}
+
+/-
+Welcome to the World One! We are going to talk about some
+basic properties of the filters.
+
+Firstly, let's think about how to define the filters.
+Idea: We want to define filters as a generalisation of the 
+"neighbourhood" of a point α ∈ X in the topological space (X, τ), 
+then obviously our filter should satisfy the following axioms:
+a) The whole set X should be the "neighbourhood" of α
+b) If F₁ is the "neighbourhood" of α, and F₁ ⊆ F₂,
+then F₂ should also be the "neighbourhood" of α.
+c) If F₁ and F₂ are the "neighbourhood" of α, then the intersection
+of them should also be the "neighbourhood" of α.
+
+Hence, we can define the filters as below:
+
+```
+/-- A filter is a collection of subsets which contains the whole set, 
+upward closed and closed under intersection. -/
+structure filter (α : Type*) :=
+(sets                     : set (set α))
+(univ_sets                : set.univ ∈ sets)
+(upward_closure {F₁ F₂}   : F₁ ∈ sets → F₁ ⊆ F₂ → F₂ ∈ sets)
+(inter_sets {F₁ F₂}       : F₁ ∈ sets → F₂ ∈ sets → F₁ ∩ F₂ ∈ sets)
+```
+
+So now if I say (f : filter α) is a filter, then
+f.univ_sets is a propostion stating that the whole set is in f.
+Similarly for f.upward_closure and f.inter_sets. Try these exercises!
+-/
+
+
+/- Lemma
+The filter f is upward closed.
+-/
+lemma mem_of_superset {x y : set α} (f : filter α) (hx : x ∈ f) (hxy : x ⊆ y) : 
+  y ∈ f :=
+begin
+  sorry
+end
