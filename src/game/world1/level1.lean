@@ -60,13 +60,4 @@ begin
 
 end
 
-/-
-Below are some useful lemmas can be used later:
--/
-
-@[simp] lemma univ_mem {f : filter α}: univ ∈ f := f.univ_sets
-
-lemma inter_mem {f : filter α} {s t : set α} (hs : s ∈ f) (ht : t ∈ f) :
-  s ∩ t ∈ f := f.inter_sets hs ht
-
 end filter

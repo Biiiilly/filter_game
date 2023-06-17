@@ -25,14 +25,19 @@ structure filter_basis (α : Type*) :=
 ```
 
 We can prove that every filter is actually a filter basis.
+i.e. verify f satisfying `nonempty` and `inter_sets`.
 -/
 
-/- Lemma
+/- Lemma : no-side-bar
 View a filter as a filter basis.
 -/
-def filter.as_basis (f : filter α) : filter_basis α :=
+lemma filter.as_basis' (f : filter α) : filter_basis α :=
 ⟨f.sets,
 begin
+
+
+
+
 
 
 
@@ -46,11 +51,18 @@ begin
 
 
 
+
+
+
+
   sorry
 end⟩
 
 /-
-Below are some useful lemmas can be used later:
+Congratulations! You have verified that every filter is a filter basis.
+Now you can view a filter f as filter basis by `filter.as_basis f`.
 -/
-lemma filter.mem_as_basis_iff (f : filter α) (t : set α) : 
-  t ∈ filter.as_basis f ↔ t ∈ f := by refl
+
+/- Axiom : filter.as_basis (f : filter α)
+filter_basis α
+-/

@@ -21,10 +21,12 @@ Let's verify that:
 /- Lemma
 The filter associated to a filter basis.
 -/
-protected def filter (B : filter_basis α) : filter α := 
+lemma filter' (B : filter_basis α) : filter α := 
 { sets := {s | ∃ t ∈ B, t ⊆ s},
   univ_sets := 
   begin
+
+
 
 
 
@@ -39,6 +41,8 @@ protected def filter (B : filter_basis α) : filter α :=
 
 
 
+
+
     sorry
   end,
   inter_sets := 
@@ -47,18 +51,21 @@ protected def filter (B : filter_basis α) : filter α :=
 
 
 
+
+
   
     sorry
   end }
 
-/-
-Below are some useful lemmas can be used later:
--/
-
-lemma mem_filter_iff (B : filter_basis α) {s : set α} : 
-  s ∈ B.filter ↔ ∃ t ∈ B, t ⊆ s := iff.rfl
-
-lemma mem_filter_of_mem (B : filter_basis α) {s : set α} : 
-  s ∈ B → s ∈ B.filter := λ s_in, ⟨s, s_in, subset.refl _⟩
 
 end filter_basis
+
+/-
+Congratulations! You have verified the axioms of filters.
+Now you can construct a filter using a filter basis B by
+`filter_basis.filter B`.
+-/
+
+/- Axiom : filter_basis.filter (B : filter_basis α)
+filter α
+-/
