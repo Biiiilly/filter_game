@@ -100,7 +100,7 @@ begin
   have hp : s ∩ -s ∈ f := filter.inter_mem h hsc,
   rw inter_compl_self at hp,
   apply hf,
-  rwa ← filter.empty_mem_iff_bot,
+  rwa ← filter.empty_mem_iff_bot',
 end
 
 instance : lattice.semilattice_inf (filter α) :=
