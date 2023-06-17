@@ -7,6 +7,7 @@ Thanks: Kevin Buzzard
 
 import myfilter.principal
 import myfilter.challenges
+import order.basic
 
 /-!
 # ultrafilters
@@ -53,7 +54,7 @@ end
 /-- We provide some basic APIs below.
 Notice there is no need to do here. -/
 
-@[simp, norm_cast] lemma mem_coe : s ∈ (f : filter α) ↔ s ∈ f := iff.rfl
+@[simp] lemma mem_coe : s ∈ (f : filter α) ↔ s ∈ f := iff.rfl
 
 lemma coe_injective : injective (coe : ultrafilter α → filter α)
 | ⟨f, h₁, h₂⟩ ⟨g, h₃, h₄⟩ rfl := by congr
@@ -61,10 +62,10 @@ lemma coe_injective : injective (coe : ultrafilter α → filter α)
 lemma eq_of_le {f g : ultrafilter α} (h : (f : filter α) ≤ g) : f = g :=
 coe_injective (g.unique h f.ne_bot')
 
-@[simp, norm_cast] lemma coe_le_coe {f g : ultrafilter α} : (f : filter α) ≤ g ↔ f = g :=
-⟨λ h, eq_of_le h, λ h, h ▸ le_rfl⟩
+@[simp] lemma coe_le_coe {f g : ultrafilter α} : (f : filter α) ≤ g ↔ f = g :=
+⟨λ h, eq_of_le h, λ h, begin rw h, exact le_refl g end⟩
 
-@[simp, norm_cast] lemma coe_inj : (f : filter α) = g ↔ f = g := coe_injective.eq_iff
+@[simp] lemma coe_inj : (f : filter α) = g ↔ f = g := coe_injective.eq_iff
 
 @[ext] lemma ext ⦃f g : ultrafilter α⦄ (h : ∀ s, s ∈ f ↔ s ∈ g) : f = g :=
 coe_injective $ filter.ext h
@@ -86,9 +87,9 @@ it there. Again, you can directly use these lemmas for now, and do them in the l
 lemma le_of_inf_ne_bot (f : ultrafilter α) {g : filter α} (hg : (↑f ⊓ g) ≠ ⊥) : 
   ↑f ≤ g :=
 begin
-  apply @le_of_inf_eq (filter α) _,
+  apply @lattice.le_of_inf_eq (filter α) _,
   apply unique f _ hg,
-  exact inf_le_left,
+  exact lattice.inf_le_left,
 end
 
 /-- Now coming to our main goal:
@@ -103,7 +104,7 @@ Hints for the forward direction:
 Notice that some of the lemmas above are in 'game.level_06_challenges',
 you can directly use them for now, and do them in the next level.
 -/
-@[simp] lemma compl_not_mem_iff : sᶜ ∉ f ↔ s ∈ f :=
+lemma compl_not_mem_iff [decidable_pred s] : -s ∉ f ↔ s ∈ f :=
 begin
   split,
   { intro h,
@@ -113,8 +114,8 @@ begin
     intro h₁,
     rw ← filter.empty_mem_iff_bot at h₁,
     rw filter.mem_inf_principal at h₁,
-    simp only [mem_empty_iff_false, mem_coe] at h₁,
-    suffices : {x : α | x ∈ s → false} = sᶜ,
+    simp only [mem_empty_eq, mem_coe] at h₁,
+    suffices : {x : α | x ∈ s → false} = -s,
     { rw this at h₁,
       contradiction },
     ext,
@@ -125,13 +126,17 @@ begin
 end
 
 -- This result is directly from previous one.
-lemma compl_mem_iff_not_mem : sᶜ ∈ f ↔ s ∉ f := 
-  by rw [← compl_not_mem_iff, compl_compl]
+lemma compl_mem_iff_not_mem [decidable_pred s] : -s ∈ f ↔ s ∉ f := 
+begin
+  symmetry,
+  rw [← compl_not_mem_iff],
+  exact classical.not_not,
+end
 
 -- Hint: 'filter.compl_not_mem' might be helpful.
 /-- If `sᶜ ∉ f ↔ s ∈ f`, then `f` is an ultrafilter. The other implication is given by
 `ultrafilter.compl_not_mem_iff`.  -/
-def of_compl_not_mem_iff (f : filter α) (h : ∀ s, sᶜ ∉ f ↔ s ∈ f) : ultrafilter α :=
+def of_compl_not_mem_iff (f : filter α) (h : ∀ s, -s ∉ f ↔ s ∈ f) : ultrafilter α :=
 { to_filter := f,
   ne_bot'   := λ hf, by simpa [hf] using h,
   le_of_le  := λ g hg hgf s hs, (h s).1 $ λ hsc, 

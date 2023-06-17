@@ -5,7 +5,7 @@ Authors: Jiale Miao, Yichen Feng, Lily Frost, Archie Prime
 Thanks: Kevin Buzzard
 -/
 
-import order.copy
+import order.basic
 
 /-!
 # Filters

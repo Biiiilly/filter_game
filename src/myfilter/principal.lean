@@ -5,8 +5,10 @@ Authors: Jiale Miao, Yichen Feng, Lily Frost, Archie Prime
 Thanks: Kevin Buzzard
 -/
 
+import tactic
 import myfilter.order
 import game.world3.level5
+import order.bounded_lattice
 
 /-!
 # Principal filters
@@ -36,11 +38,9 @@ def principal (s : set α) : filter α :=
 -- We denote the principal filters as '𝓟' for convenience:
 notation `𝓟` := filter.principal
 
-#check 𝓟 s -- represents the principal filter of s
-
 @[simp] lemma mem_principal {s t : set α} : s ∈ 𝓟 t ↔ t ⊆ s := iff.rfl
 
-lemma mem_principal_self (s : set α) : s ∈ 𝓟 s := subset.rfl
+lemma mem_principal_self (s : set α) : s ∈ 𝓟 s := sorry
 
 /-- A filter f is finer than the principal filter of s if and only if s ∈ f. -/
 lemma le_principal_iff {s : set α} {f : filter α} : f ≤ 𝓟 s ↔ s ∈ f :=
@@ -61,7 +61,7 @@ lemma principal_mono {s t : set α} : 𝓟 s ≤ 𝓟 t ↔ s ⊆ t :=
 /-- The principal filter of s is equal to the principal filter of t 
 if and only if s = t. -/
 @[simp] lemma principal_eq_iff_eq {s t : set α} : 𝓟 s = 𝓟 t ↔ s = t :=
-  by by simp only [le_antisymm_iff, le_principal_iff, mem_principal]; refl
+  by by simp only [le_antisymm_iff, le_principal_iff, mem_principal]; sorry
 
 section order_filter
 
@@ -79,11 +79,16 @@ Similarly, the largest filter should only contain the whole set.
 -/
 
 -- Let's verify these:
-instance : order_top (filter α) :=
+
+instance : lattice.order_top (filter α) :=
 { top    := { sets             := {s | ∀ x, x ∈ s},
               univ_sets        := λ x, mem_univ x,
               upward_closure   := λ x y hx hxy a, hxy (hx a),
               inter_sets       := λ x y hx hy a, mem_inter (hx _) (hy _) },
+  le := λ f g, ∀ ⦃s : set α⦄, s ∈ g → s ∈ f,
+  le_refl := sorry,
+  le_trans := sorry,
+  le_antisymm := sorry,
   le_top := 
   begin
     intros f u hu,
@@ -91,7 +96,7 @@ instance : order_top (filter α) :=
     { rw this,
       exact univ_mem },
     change ∀ x, x ∈ u at hu,
-    rwa ← eq_univ_iff_forall at hu, 
+    rwa ← eq_univ_iff_forall at hu,
   end }
 
 lemma mem_top_iff_forall {s : set α} : s ∈ (⊤ : filter α) ↔ (∀ x, x ∈ s) :=
@@ -101,11 +106,15 @@ iff.rfl
 by rw [mem_top_iff_forall, eq_univ_iff_forall]
 
 -- Hint: consider the magic of 'simp'
-instance : order_bot (filter α) :=
+instance : lattice.order_bot (filter α) :=
 { bot := { sets             := univ,
            univ_sets        := by simp only [mem_univ],
            upward_closure   := by simp only [mem_univ, implies_true_iff, forall_const],
            inter_sets       := by simp only [mem_univ, forall_const]},
+  le := λ f g, ∀ ⦃s : set α⦄, s ∈ g → s ∈ f,
+  le_refl := sorry,
+  le_trans := sorry,
+  le_antisymm := sorry,
   bot_le :=  
   begin
     intros f u hu,
@@ -121,7 +130,8 @@ lemma empty_mem_iff_bot {f : filter α} : ∅ ∈ f ↔ f = ⊥ :=
 begin
   split,
   { intro h,
-    apply bot_unique,
+    apply lattice.bot_unique,
+    rw filter.le_def,
     intros u hu,
     suffices : ∅ ⊆ u,
     { exact mem_of_superset h this },
@@ -133,14 +143,14 @@ end
 -- Hint: 'top_unique' is a good start.
 @[simp] lemma principal_univ : 𝓟 (univ : set α) = ⊤ :=
 begin
-  apply top_unique,
+  apply lattice.top_unique,
   simp only [le_principal_iff, mem_top, eq_self_iff_true],
 end
 
 -- Hint: can you guess this hint using the above hint?
 @[simp] lemma principal_empty : 𝓟 (∅ : set α) = ⊥ :=
 begin
-  apply bot_unique,
+  apply lattice.bot_unique,
   intros s hs,
   exact empty_subset s,
 end

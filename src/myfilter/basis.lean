@@ -27,7 +27,7 @@ open set
 two elements of this collection contains some element of the collection. -/
 structure filter_basis (α : Type*) :=
 (sets                   : set (set α))
-(nonempty               : sets.nonempty)
+(nonempty               : nonempty sets)
 (inter_sets {x y}       : x ∈ sets → y ∈ sets → ∃ z ∈ sets, z ⊆ x ∩ y)
 
 variables {α : Type*} {B C : filter_basis α}

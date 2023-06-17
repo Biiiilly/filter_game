@@ -27,7 +27,7 @@ universe u
 variables {α : Type u} {a : α} {s s₁ s₂ : set α}
 
 /-- A topology on `α`. -/
-@[protect_proj] class topological_space (α : Type u) :=
+class topological_space (α : Type u) :=
 (is_open        : set α → Prop)
 (is_open_univ   : is_open univ)
 (is_open_inter  : ∀s t, is_open s → is_open t → is_open (s ∩ t))
@@ -38,9 +38,9 @@ and showing that they satisfy the appropriate conditions. -/
 def topological_space.of_closed {α : Type u} (T : set (set α))
   (empty_mem : ∅ ∈ T) (sInter_mem : ∀ A ⊆ T, ⋂₀ A ∈ T) (union_mem : ∀ A B ∈ T, A ∪ B ∈ T) :
   topological_space α :=
-{ is_open := λ X, Xᶜ ∈ T,
+{ is_open := λ X, -X ∈ T,
   is_open_univ := by simp [empty_mem],
-  is_open_inter := λ s t hs ht, by simpa only [compl_inter] using union_mem sᶜ hs tᶜ ht,
+  is_open_inter := λ s t hs ht, by simpa only [compl_inter] using union_mem (-s) (-t) hs ht,
   is_open_sUnion := λ s hs,
     by rw set.compl_sUnion; exact sInter_mem (compl '' s)
     (λ z ⟨y, hy, hz⟩, by simpa [hz.symm] using hs y hy) }
@@ -67,14 +67,14 @@ def nhds (a : α) : filter α :=
   univ_sets := 
   begin
     simp only [exists_prop, mem_set_of_eq, subset_univ, true_and],
-    refine ⟨univ, topological_space.is_open_univ, mem_univ a⟩ 
+    refine ⟨univ, topological_space.is_open_univ α, mem_univ a⟩ 
   end,
   upward_closure :=
   begin
     intros u v hu huv,
     simp only [exists_prop, mem_set_of_eq] at hu ⊢,
     obtain ⟨t, ht₁, ht₂, ht₃⟩ := hu,
-    refine ⟨t, subset_trans ht₁ huv, ht₂, ht₃⟩ 
+    refine ⟨t, subset.trans ht₁ huv, ht₂, ht₃⟩,
   end,
   inter_sets :=
   begin
@@ -84,9 +84,9 @@ def nhds (a : α) : filter α :=
     obtain ⟨y, hy₁, hy₂, hy₃⟩ := hv,
     refine ⟨x ∩ y, _, is_open.inter hx₂ hy₂, mem_sep hx₃ hy₃⟩, 
     split,
-    { apply subset_trans _ hx₁,
+    { apply subset.trans _ hx₁,
       exact inter_subset_left x y },
-    { apply subset_trans _ hy₁,
+    { apply subset.trans _ hy₁,
       exact inter_subset_right x y }
   end }
 
@@ -121,7 +121,8 @@ lemma is_open.mem_nhds {a : α} {s : set α} (hs : is_open s) (ha : a ∈ s) :
   s ∈ 𝓝 a :=
 begin
   rw mem_nhds,
-  refine ⟨s, rfl.subset, hs, ha⟩
+  refine ⟨s, _, hs, ha⟩,
+  exact subset.refl s,
 end
 
 -- Using results above, we can get this:
