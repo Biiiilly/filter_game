@@ -1,10 +1,18 @@
-import myfilter.basis -- import our filter basis
+import myfilter.basis -- hide
 
-open set -- make everything about sets works
+open set -- hide
 
-variable {α : Type*} -- Say α is a collection of things.
+variable {α : Type*} -- hide
 
 /-
+
+# Filter Basis World
+
+## Level 1 : `filter.as_basis`
+
+Welcome to the Filter Basis World! We are going to talk
+about the filter basis and the relevent properties.
+
 Let's define the filter basis:
 ```
 /-- A filter basis is a nonempty collection of sets such that 

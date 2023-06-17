@@ -7,6 +7,11 @@ variable {α : Type*} -- Say α is a collection of things.
 namespace filter -- lemmas below would have a prefix 'filter'
 
 /-
+
+# Filter World
+
+## Level 1 : `filter.mem_of_superset`
+
 Welcome to the Filter World! We are going to talk about some
 basic properties of the filters.
 
@@ -41,7 +46,7 @@ Similarly for f.upward_closure and f.inter_sets. Try these exercises!
 /- Lemma
 The filter f is upward closed.
 -/
-lemma mem_of_superset {x y : set α} (f : filter α) (hx : x ∈ f) (hxy : x ⊆ y) : 
+lemma mem_of_superset {x y : set α} {f : filter α} (hx : x ∈ f) (hxy : x ⊆ y) : 
   y ∈ f :=
 begin
   sorry
@@ -53,7 +58,7 @@ Below are some useful lemmas can be used later:
 
 @[simp] lemma univ_mem (f : filter α): univ ∈ f := f.univ_sets
 
-lemma inter_mem (f : filter α) {s t : set α} (hs : s ∈ f) (ht : t ∈ f) :
+lemma inter_mem {f : filter α} {s t : set α} (hs : s ∈ f) (ht : t ∈ f) :
   s ∩ t ∈ f := f.inter_sets hs ht
 
 end filter
