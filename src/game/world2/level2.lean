@@ -4,8 +4,6 @@ open set -- hide
 
 variable {α : Type*} -- hide
 
-namespace filter_basis
-
 /- 
 
 # Filter Basis World
@@ -18,7 +16,7 @@ that Bᵢ ⊆ fⱼ for some Bᵢ ∈ B.
 Let's verify that:
 -/
 
-/- Lemma : no side bar
+/- Lemma : no-side-bar
 The filter associated to a filter basis.
 -/
 lemma filter' (B : filter_basis α) : filter α := 
@@ -26,10 +24,16 @@ begin
   sorry
 /- hint
 refine ⟨{s | ∃ t ∈ B, t ⊆ s}, _, _, _⟩,
+{
+  sorry
+},
+{
+  sorry
+},
+{
+  sorry
+}
 -/
-
-
-
 
 
 
@@ -42,9 +46,6 @@ refine ⟨{s | ∃ t ∈ B, t ⊆ s}, _, _, _⟩,
 
 
 end
-
-
-end filter_basis
 
 /-
 Congratulations! You have verified the axioms of filters.

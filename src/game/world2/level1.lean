@@ -36,6 +36,12 @@ begin
   sorry
 /- hint
 refine ⟨f.sets, _, _⟩,
+{
+  sorry
+},
+{
+  sorry
+}
 -/
 
 

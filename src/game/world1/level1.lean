@@ -4,8 +4,6 @@ open set -- make everyting about sets works
 
 variable {α : Type*} -- Say α is a collection of things.
 
-namespace filter -- lemmas below would have a prefix 'filter'
-
 /-
 
 # Filter World
@@ -46,7 +44,7 @@ Similarly for f.upward_closure and f.inter_sets. Try these exercises!
 /- Lemma
 The filter f is upward closed.
 -/
-lemma mem_of_superset {x y : set α} {f : filter α} (hx : x ∈ f) (hxy : x ⊆ y) : 
+lemma filter.mem_of_superset {x y : set α} {f : filter α} (hx : x ∈ f) (hxy : x ⊆ y) : 
   y ∈ f :=
 begin
   sorry
@@ -72,5 +70,3 @@ univ ∈ f
 /- Axiom : filter.inter_mem {s t : set α} (hs : s ∈ f) (ht : t ∈ f)
 s ∩ t ∈ f
 -/
-
-end filter
