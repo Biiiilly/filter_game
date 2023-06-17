@@ -18,10 +18,14 @@ i.e. ∀ u ∈ G → (∃ v ∈ F, v ⊆ u)
 /- Lemma
 Equivalence of the definition
 -/
-lemma filter.equivalence (f g : filter α) : 
+lemma filter.equivalent_def (f g : filter α) : 
   f ≤ g ↔ (∀ {s : set α}, s ∈ g → (∃ t ∈ f, t ⊆ s)) :=
 begin
   sorry
+
+
+
+
 
 
 

@@ -26,13 +26,18 @@ Let's define `le` on filter basis:
 def le (B C : filter_basis α) := ∀ {s : set α}, s ∈ C → (∃ t ∈ B, t ⊆ s)
 ```
 
-We denote it as B ≤ᵇ C:
+You can use this lemma I provided on the left:
 
 ```
-notation B `≤ᵇ` C := filter_basis.le B C
+lemma le_def (B C : filter_basis α) : 
+  (B ≤ᵇ C) ↔ (∀ {s : set α}, s ∈ C → (∃ t ∈ B, t ⊆ s))
 ```
 
-Next, let's think about how to prove this:
+Now, let's think about how to prove this:
+-/
+
+/- Axiom : filter_basis.le_def (B C : filter_basis α) :
+(B ≤ᵇ C) ↔ (∀ {s : set α}, s ∈ C → (∃ t ∈ B, t ⊆ s))
 -/
 
 /- Lemma
@@ -43,6 +48,10 @@ lemma filter_basis_filter_le {B C : filter_basis α} (h : B ≤ᵇ C) :
   filter_basis.filter B ≤ filter_basis.filter C :=
 begin
   sorry
+
+
+
+
 
 
 

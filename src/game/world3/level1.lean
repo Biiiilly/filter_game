@@ -25,13 +25,15 @@ when we talk about partitions of an interval, a finer partition has more subinte
 
 -/
 
-/- Lemma
+/- Lemma : no-side-bar
 Let's verify it satisfies partial order:
 -/
-instance : partial_order (filter α) :=
+lemma filter_partial_order : partial_order (filter α) :=
 { le            := λ f g, ∀ ⦃s : set α⦄, s ∈ g → s ∈ f,
   le_antisymm   := 
   begin
+
+
 
 
 
@@ -46,6 +48,8 @@ instance : partial_order (filter α) :=
 
 
 
+
+
     sorry
   end,
   le_trans      :=
@@ -55,11 +59,7 @@ instance : partial_order (filter α) :=
 
 
 
+
+
     sorry
   end }
-
-/-
-Below are some useful lemmas can be used later:
--/
-
-theorem filter.le_def {f g : filter α}: f ≤ g ↔ ∀ s ∈ g, s ∈ f := iff.rfl

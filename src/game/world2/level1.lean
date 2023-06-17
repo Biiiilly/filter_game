@@ -34,35 +34,40 @@ View a filter as a filter basis.
 lemma filter.as_basis' (f : filter α) : filter_basis α :=
 ⟨f.sets,
 begin
-
-
-
-
-
-
-
-
-
   sorry
+
+
+
+
+
+
+
+
+
 end,
 begin
-
-
-
-
-
-
-
-
-
   sorry
+
+
+
+
+
+
+
+
+
 end⟩
 
 /-
 Congratulations! You have verified that every filter is a filter basis.
 Now you can view a filter f as filter basis by `filter.as_basis f`.
+I provide some basic APIs of filter basis, and you can check it on the left.
 -/
 
 /- Axiom : filter.as_basis (f : filter α)
 filter_basis α
+-/
+
+/- Axiom : filter.mem_as_basis_iff (f : filter α) (t : set α)
+t ∈ filter.as_basis f ↔ t ∈ f
 -/

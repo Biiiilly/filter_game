@@ -18,7 +18,7 @@ that Bᵢ ⊆ fⱼ for some Bᵢ ∈ B.
 Let's verify that:
 -/
 
-/- Lemma
+/- Lemma : no side bar
 The filter associated to a filter basis.
 -/
 lemma filter' (B : filter_basis α) : filter α := 
@@ -63,9 +63,18 @@ end filter_basis
 /-
 Congratulations! You have verified the axioms of filters.
 Now you can construct a filter using a filter basis B by
-`filter_basis.filter B`.
+`filter_basis.filter B`. I also provide some basic APIs on the left,
+please check it out.
 -/
 
 /- Axiom : filter_basis.filter (B : filter_basis α)
 filter α
+-/
+
+/- Axiom : filter_basis.mem_filter_iff (B : filter_basis α) {s : set α}
+s ∈ B.filter ↔ ∃ t ∈ B, t ⊆ s
+-/
+
+/- Axiom : filter_basis.mem_filter_of_mem (B : filter_basis α) {s : set α}
+s ∈ B → s ∈ B.filter
 -/

@@ -60,4 +60,17 @@ begin
 
 end
 
+/-
+I also provide some basic lemmas of filters (called APIs) on the left,
+please check it out.
+-/
+
+/- Axiom : filter.univ_mem
+univ ∈ f
+-/
+
+/- Axiom : filter.inter_mem {s t : set α} (hs : s ∈ f) (ht : t ∈ f)
+s ∩ t ∈ f
+-/
+
 end filter

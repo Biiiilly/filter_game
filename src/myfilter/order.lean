@@ -6,7 +6,6 @@ Thanks: Kevin Buzzard
 -/
 
 import myfilter.basis
-import game.world2.level3
 import game.world1.level1
 
 /-!
@@ -19,6 +18,15 @@ We define '≤' in filters and filter basis in this file.
 open set
 
 variable {α : Type*}
+
+instance : partial_order (filter α) :=
+{ le            := λ f g, ∀ ⦃s : set α⦄, s ∈ g → s ∈ f,
+  le_antisymm   := λ a b h₁ h₂, filter.filter_eq $ subset.antisymm h₂ h₁,
+  le_refl       := λ a, begin intros s h, exact h end,
+  le_trans      := λ a b c h₁ h₂, subset.trans h₂ h₁ }
+
+theorem filter.le_def {f g : filter α}: f ≤ g ↔ ∀ s ∈ g, s ∈ f := iff.rfl
+
 
 namespace filter_basis
 

@@ -6,10 +6,6 @@ variable {α : Type*} --hide
 
 namespace filter_basis
 
-/- Axiom : filter_basis.le_def (B C : filter_basis α) :
-(B ≤ᵇ C) ↔ (∀ {s : set α}, s ∈ C → (∃ t ∈ B, t ⊆ s))
--/
-
 /-
 
 # Order World
