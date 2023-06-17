@@ -32,9 +32,11 @@ i.e. verify f satisfying `nonempty` and `inter_sets`.
 View a filter as a filter basis.
 -/
 lemma filter.as_basis' (f : filter α) : filter_basis α :=
-⟨f.sets,
 begin
   sorry
+/- hint
+refine ⟨f.sets, _, _⟩,
+-/
 
 
 
@@ -42,21 +44,7 @@ begin
 
 
 
-
-
-end,
-begin
-  sorry
-
-
-
-
-
-
-
-
-
-end⟩
+end
 
 /-
 Congratulations! You have verified that every filter is a filter basis.

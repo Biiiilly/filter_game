@@ -29,37 +29,18 @@ when we talk about partitions of an interval, a finer partition has more subinte
 Let's verify it satisfies partial order:
 -/
 lemma filter_partial_order : partial_order (filter α) :=
-{ le            := λ f g, ∀ ⦃s : set α⦄, s ∈ g → s ∈ f,
-  le_antisymm   := 
-  begin
-
-
-
-
-
-
-
-    sorry
-  end,
-  le_refl       :=
-  begin
-
-
-
-
-
-
-
-    sorry
-  end,
-  le_trans      :=
-  begin
-
-
-
-
-
-
-
-    sorry
-  end }
+begin
+  sorry
+/- hint
+use (λ (f g : filter α), ∀ ⦃s : set α⦄, s ∈ g → s ∈ f),
+{
+  sorry,
+},
+{
+  sorry,
+},
+{
+  sorry
+}
+-/
+end

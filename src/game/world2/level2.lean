@@ -22,9 +22,11 @@ Let's verify that:
 The filter associated to a filter basis.
 -/
 lemma filter' (B : filter_basis α) : filter α := 
-{ sets := {s | ∃ t ∈ B, t ⊆ s},
-  univ_sets := 
-  begin
+begin
+  sorry
+/- hint
+refine ⟨{s | ∃ t ∈ B, t ⊆ s}, _, _, _⟩,
+-/
 
 
 
@@ -32,10 +34,6 @@ lemma filter' (B : filter_basis α) : filter α :=
 
 
 
-    sorry
-  end,
-  upward_closure := 
-  begin
 
 
 
@@ -43,19 +41,7 @@ lemma filter' (B : filter_basis α) : filter α :=
 
 
 
-    sorry
-  end,
-  inter_sets := 
-  begin
-
-
-
-
-
-
-  
-    sorry
-  end }
+end
 
 
 end filter_basis
