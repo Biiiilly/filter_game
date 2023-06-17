@@ -1,11 +1,13 @@
-import myfilter.basic
+import myfilter.basic -- imports our filters
 
-open set
+open set -- make everyting about sets works
 
-variable {α : Type*}
+variable {α : Type*} -- Say α is a collection of things.
+
+namespace filter -- lemmas below would have a prefix 'filter'
 
 /-
-Welcome to the World One! We are going to talk about some
+Welcome to the Filter World! We are going to talk about some
 basic properties of the filters.
 
 Firstly, let's think about how to define the filters.
@@ -44,3 +46,14 @@ lemma mem_of_superset {x y : set α} (f : filter α) (hx : x ∈ f) (hxy : x ⊆
 begin
   sorry
 end
+
+/-
+Below are some useful lemmas can be used later:
+-/
+
+@[simp] lemma univ_mem (f : filter α): univ ∈ f := f.univ_sets
+
+lemma inter_mem (f : filter α) {s t : set α} (hs : s ∈ f) (ht : t ∈ f) :
+  s ∩ t ∈ f := f.inter_sets hs ht
+
+end filter

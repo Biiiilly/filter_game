@@ -57,14 +57,4 @@ by simp only [filter_eq_iff, ext_iff, filter.mem_sets]
 lemma ext : (∀ s, s ∈ f ↔ s ∈ g) → f = g :=
 filter.ext_iff.2
 
--- The following three lemmas are directlyfrom the definiton of the filters:
-@[simp] lemma univ_mem : univ ∈ f :=
-f.univ_sets
-
-lemma mem_of_superset {x y : set α} (hx : x ∈ f) (hxy : x ⊆ y) : y ∈ f :=
-f.upward_closure hx hxy
-
-lemma inter_mem {s t : set α} (hs : s ∈ f) (ht : t ∈ f) : s ∩ t ∈ f :=
-f.inter_sets hs ht
-
 end filter

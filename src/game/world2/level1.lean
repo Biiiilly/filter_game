@@ -1,6 +1,8 @@
-import game.world1.level1
+import myfilter.basis -- import our filter basis
 
-open set
+open set -- make everything about sets works
+
+variable {α : Type*} -- Say α is a collection of things.
 
 /-
 Let's define the filter basis:
@@ -19,4 +21,18 @@ so clearly we want to do something like U ∈ B.
 ```
 instance : has_mem (set α) (filter_basis α) := ⟨λ U B, U ∈ B.sets⟩
 ```
+
+We can prove that every filter is actually a filter basis.
 -/
+
+/- Lemma
+View a filter as a filter basis.
+-/
+def filter.as_basis (f : filter α) : filter_basis α :=
+⟨f.sets,
+begin
+  sorry
+end,
+begin
+  sorry
+end⟩

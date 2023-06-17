@@ -5,7 +5,7 @@ Authors: Jiale Miao, Yichen Feng, Lily Frost, Archie Prime
 Thanks: Kevin Buzzard
 -/
 
-import myfilter.basic
+import myfilter.basic -- imports the filters
 
 /-!
 # Filter basis
@@ -36,10 +36,7 @@ variables {α : Type*} {B C : filter_basis α}
 -- so clearly we want to do something like U ∈ B. 
 instance : has_mem (set α) (filter_basis α) := ⟨λ U B, U ∈ B.sets⟩
 
--- We can prove that every filter is actually a filter basis.
-/-- View a filter as a filter basis. -/
-def filter.as_basis (f : filter α) : filter_basis α :=
-⟨f.sets, ⟨univ, filter.univ_mem⟩, λ x y hx hy, ⟨x ∩ y, filter.inter_mem hx hy, subset_rfl⟩⟩
+/-
 
 -- Here are some APIs of filter basis:
 lemma filter.mem_as_basis_iff (f : filter α) (t : set α) : 
@@ -48,6 +45,8 @@ lemma filter.mem_as_basis_iff (f : filter α) (t : set α) :
 namespace filter_basis
 
 @[simp] lemma mem_sets {s : set α} : s ∈ B.sets ↔ s ∈ B := iff.rfl
+
+
 
 lemma filter_basis_eq : ∀ {B C : filter_basis α}, B.sets = C.sets → B = C
 | ⟨a, _, _⟩ ⟨._, _, _⟩ rfl := rfl
@@ -117,3 +116,6 @@ begin
 end
 
 end filter_basis
+
+-/
+
