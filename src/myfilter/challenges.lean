@@ -60,7 +60,7 @@ Now we are coming to another challenging puzzle.
 Hint for the forward direction: 'mem_inf_iff'
 Hint for the backward direction: 'inter_mem_inf' and consider 's ∩ t'
 -/
-theorem mem_inf_principal {f : filter α} {s t : set α} [decidable_pred s] [decidable_pred t]:
+theorem mem_inf_principal' {f : filter α} {s t : set α} [decidable_pred s] [decidable_pred t]:
   s ∈ f ⊓ 𝓟 t ↔ {x | x ∈ t → x ∈ s} ∈ f :=
 begin
   split,
@@ -94,7 +94,7 @@ begin
 end
 
 -- Hint: 'filter.inter_mem' might be helpful.
-lemma compl_not_mem {f : filter α} {s : set α} (hf : f ≠ ⊥) (h : s ∈ f) : -s ∉ f :=
+lemma compl_not_mem' {f : filter α} {s : set α} (hf : f ≠ ⊥) (h : s ∈ f) : -s ∉ f :=
 begin
   intro hsc,
   have hp : s ∩ -s ∈ f := filter.inter_mem h hsc,
