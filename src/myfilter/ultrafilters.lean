@@ -113,7 +113,7 @@ begin
     apply le_of_inf_ne_bot',
     intro h₁,
     rw ← filter.empty_mem_iff_bot' at h₁,
-    rw filter.mem_inf_principal at h₁,
+    rw filter.mem_inf_principal' at h₁,
     simp only [mem_empty_eq, mem_coe] at h₁,
     suffices : {x : α | x ∈ s → false} = -s,
     { rw this at h₁,
@@ -122,7 +122,7 @@ begin
     simp only [mem_set_of_eq],
     refl },
   { intro h,
-    exact filter.compl_not_mem f.ne_bot' h }
+    exact filter.compl_not_mem' f.ne_bot' h }
 end
 
 -- This result is directly from previous one.
@@ -140,6 +140,6 @@ def of_compl_not_mem_iff (f : filter α) (h : ∀ s, -s ∉ f ↔ s ∈ f) : ult
 { to_filter := f,
   ne_bot'   := λ hf, by simpa [hf] using h,
   le_of_le  := λ g hg hgf s hs, (h s).1 $ λ hsc, 
-                by exact filter.compl_not_mem hg hs (hgf hsc) }
+                by exact filter.compl_not_mem' hg hs (hgf hsc) }
 
 end ultrafilter
