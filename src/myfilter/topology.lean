@@ -99,7 +99,7 @@ notation `𝓝` := nhds
 -- Try these exercises below:
 /-- To show a filter is above the neighborhood filter at `a`, it suffices to show that 
 it is above the principal filter of some open set `s` containing `a`. -/
-lemma nhds_le_of_le {f a} {s : set α} (h : a ∈ s) (ho : is_open s) (hsf : 𝓟 s ≤ f) : 
+lemma nhds_le_of_le' {f a} {s : set α} (h : a ∈ s) (ho : is_open s) (hsf : 𝓟 s ≤ f) : 
   (𝓝 a) ≤ f :=
 begin
   intros u hu,
@@ -109,7 +109,7 @@ begin
   refine ⟨s, hsf, ho, h⟩
 end
 
-lemma mem_of_mem_nhds {a : α} {s : set α} : s ∈ (𝓝 a) → a ∈ s :=
+lemma mem_of_mem_nhds' {a : α} {s : set α} : s ∈ (𝓝 a) → a ∈ s :=
 begin
   intro hs,
   rw mem_nhds at hs,
@@ -117,7 +117,7 @@ begin
   exact hu₁ hu₃
 end
 
-lemma is_open.mem_nhds {a : α} {s : set α} (hs : is_open s) (ha : a ∈ s) :
+lemma is_open.mem_nhds' {a : α} {s : set α} (hs : is_open s) (ha : a ∈ s) :
   s ∈ 𝓝 a :=
 begin
   rw mem_nhds,
@@ -126,9 +126,9 @@ begin
 end
 
 -- Using results above, we can get this:
-lemma is_open.mem_nhds_iff {a : α} {s : set α} (hs : is_open s) : s ∈ (𝓝 a) ↔ a ∈ s :=
+lemma is_open.mem_nhds_iff' {a : α} {s : set α} (hs : is_open s) : s ∈ (𝓝 a) ↔ a ∈ s :=
 begin
   split,
-  { exact mem_of_mem_nhds },
-  { exact is_open.mem_nhds hs }
+  { exact mem_of_mem_nhds' },
+  { exact is_open.mem_nhds' hs }
 end
